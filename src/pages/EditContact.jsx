@@ -1,9 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
-import useGlobalReducer from "../hooks/useGlobalReducer";
 
 
-const NewContact = () => {
+const EditContact = () => {
   
   const fields = [
     { label: "Full Name", type: "text", placeholder: "Full Name", id: "name" },
@@ -13,9 +12,8 @@ const NewContact = () => {
   ]
 
   const navigate = useNavigate();
-  const { dispatch } = useGlobalReducer();
 
-  const[ newContact, setNewContact ] = useState({
+  const[ EditContact, setEditContact ] = useState({
     name: "",
     phone: "",
     email: "",
@@ -27,36 +25,29 @@ const NewContact = () => {
 
     const apiUrl = import.meta.env.VITE_API_URL + "/contacts";
     
-    try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newContact)
-      });
-      const data = await response.json();
-
-      dispatch({ type: 'load_contacts', payload: data.contacts });      
-      if (response.ok) {
-        
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("Error creating contact:", error);
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(EditContact)
+    })
+    const data = await response.json();
+    if (response.ok) {
+      navigate("/")
     }
   }
 
   const handleImput = async (e) => {
-    setNewContact({
-      ...newContact,
+    setEditContact({
+      ...EditContact,
       [e.target.id]: e.target.value
     })
   }
 
   return (<>
   <div className="d-flex justify-content-center align-items-center flex-column mt-5">
-    <h1>Add New Contact</h1>
+    <h1>Edit Contact</h1>
     <form className="d-flex flex-column w-50">
       {
         fields.map((field, index) => (
@@ -67,7 +58,7 @@ const NewContact = () => {
               className="form-control" 
               id={field.id} 
               placeholder={field.placeholder}
-              value={newContact[field.id]}
+              value={EditContact[field.id]}
               onChange={handleImput}
             />
           </div>
@@ -78,11 +69,11 @@ const NewContact = () => {
         className="btn btn-outline-dark mt-2 w-50 m-auto" 
         type="submit"
       >
-        Save Contact
+        Edit
       </button>
     </form>
-  </div>
+  </div> 
   </>)
 }
 
-export default NewContact
+export default EditContact

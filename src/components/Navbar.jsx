@@ -3,17 +3,15 @@ import { Link } from "react-router-dom";
 export const Navbar = () => {
 
 	return (
-		<nav className="navbar navbar-light bg-light">
+		<nav className="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
 			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">Agenda de Steven Acero</span>
+				<Link className="text-black text-decoration-none" to="/">
+					<span className="navbar-brand mb-0 h1">Contact List</span>
 				</Link>
-				<div className="ml-auto">
-					<Link to="/new-contact">
-						<button className="btn btn-success me-md-2" type="button">Agregar nuevo contacto</button>
-					</Link>
-				</div>
+				<Link to="/new-contact">
+					<button className="btn btn-dark" type="submit">Add New Contact</button>
+				</Link>
 			</div>
-		</nav>
-	);
+		</nav>	
+);
 };

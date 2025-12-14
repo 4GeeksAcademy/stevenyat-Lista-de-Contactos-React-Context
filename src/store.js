@@ -11,13 +11,24 @@ export const initialStore=()=>{
         id: 2,
         title: "Do my homework",
         background: null,
-      }
-    ]
+      },
+    ],
+      
+    contacts: [],
+      
+    imgPerson: "https://wallpapers.com/images/hd/placeholder-profile-icon-8qmjk1094ijhbem9.jpg",
   }
 }
 
 export default function storeReducer(store, action = {}) {
   switch(action.type){
+ 
+    case 'load_contacts':
+      return {
+        ...store,
+        contacts: action.payload || []
+      };
+
     case 'add_task':
 
       const { id,  color } = action.payload
@@ -27,6 +38,6 @@ export default function storeReducer(store, action = {}) {
         todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
       };
     default:
-      throw Error('Unknown action.');
+      return store;
   }    
 }
