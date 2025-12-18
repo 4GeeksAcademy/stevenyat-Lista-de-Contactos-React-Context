@@ -58,7 +58,7 @@ const contactCard = () => {
 							</div>
 						</div>
 						<div className="mt-2 mt-md-4 me-0 me-md-3 d-flex justify-content-center justify-content-md-start align-items-start pb-2 pb-md-0">
-							<Link to="/edit-contact">
+							<Link to={"/edit-contact/"+ contact.id}>
 								<button
 									type="button"
 									className="btn btn-light mx-2"

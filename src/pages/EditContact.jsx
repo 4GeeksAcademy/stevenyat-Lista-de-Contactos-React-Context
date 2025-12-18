@@ -1,8 +1,17 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { useParams } from "react-router-dom";
+
+
 
 
 const EditContact = () => {
+
+  const {id} = useParams();
+
+  const { store } = useGlobalReducer();
+
   
   const fields = [
     { label: "Full Name", type: "text", placeholder: "Full Name", id: "name" },
@@ -13,24 +22,22 @@ const EditContact = () => {
 
   const navigate = useNavigate();
 
-  const[ EditContact, setEditContact ] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    address: ""
-  })
+  const contact = store.contacts.find((contact) => contact.id.toString() === id);
+
+
+  const[ newContact, setNewContact ] = useState(contact)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const apiUrl = import.meta.env.VITE_API_URL + "/contacts";
+    const apiUrl = import.meta.env.VITE_API_URL + "/contacts/" + id;
     
     const response = await fetch(apiUrl, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(EditContact)
+      body: JSON.stringify(newContact)
     })
     const data = await response.json();
     if (response.ok) {
@@ -39,11 +46,14 @@ const EditContact = () => {
   }
 
   const handleImput = async (e) => {
-    setEditContact({
-      ...EditContact,
+    setNewContact({
+      ...newContact,
       [e.target.id]: e.target.value
     })
   }
+  useEffect(() => {
+
+  }, [])
 
   return (<>
   <div className="d-flex justify-content-center align-items-center flex-column mt-5">
@@ -58,7 +68,7 @@ const EditContact = () => {
               className="form-control" 
               id={field.id} 
               placeholder={field.placeholder}
-              value={EditContact[field.id]}
+              value={newContact[field.id]}
               onChange={handleImput}
             />
           </div>
