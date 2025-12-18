@@ -17,9 +17,6 @@ export const Home = () => {
 		console.error("Error fetching contacts:", error);
 	}   
 	};
-	useEffect(() => {
-		fetchContact();
-	}, []);
 
 	return (
 		<div className="text-center m-3 m-md-5">
