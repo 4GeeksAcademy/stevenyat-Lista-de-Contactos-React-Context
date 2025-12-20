@@ -14,7 +14,7 @@ export const initialStore=()=>{
       },
     ],
     agendas: [],
-    agendaForName: "samuel_agenda",
+    agendaForName: "stevenyat",
     contacts: [],
       
     imgPerson: "https://wallpapers.com/images/hd/placeholder-profile-icon-8qmjk1094ijhbem9.jpg",

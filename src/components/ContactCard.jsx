@@ -20,8 +20,8 @@ const contactCard = () => {
 
     return (<>
 			{store.contacts && store.contacts.map((contact) => (
-				<div id="card" className="d-flex justify-content-center px-2" key={contact.id}>
-					<div className="d-flex flex-column flex-md-row border border-secondary rounded justify-content-between w-75 w-lg-75 px-2 px-md-3 mb-2">
+				<div className="d-flex justify-content-center px-2" key={contact.id}>
+					<div id="card" className="d-flex flex-column flex-md-row border border-secondary rounded justify-content-between w-75 w-lg-75 px-2 px-md-3 mb-2">
 						<div className="d-flex flex-column flex-sm-row p-2 align-items-center align-items-sm-start flex-grow-1">
 							<img
 								src={store.imgPerson}

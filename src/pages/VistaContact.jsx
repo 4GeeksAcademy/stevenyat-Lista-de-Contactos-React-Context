@@ -25,7 +25,7 @@ const contact = store.contacts.find((contact) => contact.id.toString() === id);
 								<h6><i className="fa-solid fa-phone-flip me-2"></i>{contact.phone}</h6>
 								<h6><i className="fa-solid fa-envelope me-2"></i>{contact.email}</h6>
               </div>
-              <a href="#" className="btn btn-primary w-50 m-auto">Hire</a>
+              <a href="#" className="btn btn-secondary w-50 m-auto">Hire</a>
             </div>
         </div>
       </div>

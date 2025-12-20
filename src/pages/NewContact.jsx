@@ -55,7 +55,7 @@ const NewContact = () => {
   }
 
   return (<>
-  <div className="d-flex justify-content-center align-items-center flex-column mt-5">
+  <div className="d-flex justify-content-center align-items-center flex-column container card w-50 mt-5 pb-3">
     <h1>Add New Contact</h1>
     <form className="d-flex flex-column w-50">
       {
@@ -75,7 +75,7 @@ const NewContact = () => {
       }
       <button 
         onClick={handleSubmit}
-        className="btn btn-outline-dark mt-2 w-50 m-auto" 
+        className="btn btn-secondary mt-2 w-50 m-auto" 
         type="submit"
       >
         Save Contact

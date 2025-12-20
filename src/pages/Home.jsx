@@ -45,7 +45,7 @@ export const Home = () => {
 	};
 	const crearAgenda = async () => {
 
-		const urlApiAgenda = `${import.meta.env.VITE_API_URL}samuel_agenda/`;
+		const urlApiAgenda = `${import.meta.env.VITE_API_URL}stevenyat/`;
 
 		const response = await fetch(urlApiAgenda, {
 			method: 'POST',
@@ -66,7 +66,7 @@ export const Home = () => {
 				<span className="visually-hidden">Loading...</span>
 			</div> }
 
-			<h1 className="mb-4">Contact List </h1>
+			<h1 id="title" className="mb-4">Contact List Of {store.agendaForName}</h1>
 			{store.contacts.length === 0 ? (
 				<div className="d-flex flex-column align-items-center justify-content-center py-5">
 					<i className="fa-solid fa-address-book fa-4x text-muted mb-4"></i>
