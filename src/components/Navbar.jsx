@@ -12,7 +12,7 @@ export const Navbar = () => {
 		const data = await response.json();
 		dispatch({type: 'load_agendas', payload: data.agendas});
 	};
-	console.log(store.agendaForName);
+
 	useEffect(() => {
 		fetAllAgendas();
 	}, []);
