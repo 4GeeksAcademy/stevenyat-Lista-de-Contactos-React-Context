@@ -13,7 +13,7 @@ const NewContact = () => {
   ]
 
   const navigate = useNavigate();
-  const { dispatch } = useGlobalReducer();
+  const { store, dispatch } = useGlobalReducer();
 
   const[ newContact, setNewContact ] = useState({
     name: "",
@@ -25,7 +25,7 @@ const NewContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const apiUrl = import.meta.env.VITE_API_URL + "/contacts";
+    const apiUrl = `${import.meta.env.VITE_API_URL}${store.agendaForName}/contacts`;
     
     try {
       const response = await fetch(apiUrl, {

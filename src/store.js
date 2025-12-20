@@ -13,7 +13,8 @@ export const initialStore=()=>{
         background: null,
       },
     ],
-      
+    agendas: [],
+    agendaForName: [],
     contacts: [],
       
     imgPerson: "https://wallpapers.com/images/hd/placeholder-profile-icon-8qmjk1094ijhbem9.jpg",
@@ -22,6 +23,17 @@ export const initialStore=()=>{
 
 export default function storeReducer(store, action = {}) {
   switch(action.type){
+    case 'SET_AGENDA':
+      return {
+        ...store,
+        agendaForName: action.payload || [],
+      };
+
+    case 'load_agendas':
+      return {
+        ...store,
+        agendas: action.payload || [],
+      };
  
     case 'load_contacts':
       return {
