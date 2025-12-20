@@ -4,40 +4,69 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { useEffect, useState } from "react";
 
 export const Home = () => {
+
+	const [ isLoading, setIsLoading ] = useState(false);
+
 	const { store, dispatch } = useGlobalReducer();
-	const urlApi = `${import.meta.env.VITE_API_URL}${store.agendaForName}/contacts/`;
-	// const urlApiAgenda = import.meta.env.VITE_API_AGENDA_URL
-	// const[ newAgenda, setNewAgenda ] = useState([{ "slug": "stevenyat", "id": 54321 }]);
+
+
 	
 	const fetchContact = async () => {
-	try{
-	const response = await fetch(urlApi);
-	const data = await response.json();
-	dispatch({ type: 'load_contacts', payload: data.contacts });
-	console.log(data.contacts);
-	}catch(error){
-		console.error("Error fetching contacts:", error);
-	}   
+		const urlApi = `${import.meta.env.VITE_API_URL}${store.agendaForName}/contacts/`;
+		
+		setIsLoading(true);
+		
+		try{
+
+			if( !store || store.agendaForName === "" || !store.agendaForName){
+				setIsLoading(false);
+				return;
+			}
+
+			const response = await fetch(urlApi);
+
+			if (!response.ok) {
+				let resp = await crearAgenda();
+				if (resp.ok) {
+					console.log("Agenda created successfully");
+					fetchContact();
+					return;
+				}
+			}
+
+			const data = await response.json();
+			dispatch({ type: 'load_contacts', payload: data.contacts });
+
+		} catch(error){
+			console.error("Error fetching contacts:", error);
+		} finally {
+			setIsLoading(false);
+		}
 	};
-	// const crearAgenda = async () => {
-	// 	const response = await fetch(urlApiAgenda, {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify(newAgenda),
-	// 	});
-	// 	const data = await response.json();
-	// 	console.log(data);
-	// }
+	const crearAgenda = async () => {
+
+		const urlApiAgenda = `${import.meta.env.VITE_API_URL}samuel_agenda/`;
+
+		const response = await fetch(urlApiAgenda, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		const data = await response.json();
+	}
 	useEffect(() => {
 		fetchContact();
-	},[]);
+	},[store.agendaForName]);
 
 	return (
 		<div className="text-center m-3 m-md-5">
-			<h1 className="mb-4">Contact List
-				{store && store.contactForName } </h1>
+
+			{ isLoading && <div className="spinner-border text-primary" role="status">
+				<span className="visually-hidden">Loading...</span>
+			</div> }
+
+			<h1 className="mb-4">Contact List </h1>
 			{store.contacts.length === 0 ? (
 				<div className="d-flex flex-column align-items-center justify-content-center py-5">
 					<i className="fa-solid fa-address-book fa-4x text-muted mb-4"></i>
