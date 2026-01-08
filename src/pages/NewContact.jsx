@@ -25,7 +25,7 @@ const NewContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const apiUrl = `${import.meta.env.VITE_API_URL}${store.agendaForName}/contacts`;
+    const apiUrl = `https://playground.4geeks.com/contact/agendas/${store.agendaForName}/contacts`;
     
     try {
       const response = await fetch(apiUrl, {

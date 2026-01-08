@@ -6,7 +6,7 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 const contactCard = () => {
 
 	const { store, dispatch } = useGlobalReducer();
-	const urlApi = `${import.meta.env.VITE_API_URL}${store.agendaForName}/contacts/`;
+	const urlApi = `https://playground.4geeks.com/contact/agendas/${store.agendaForName}/contacts/`;
 
 	const deleteContact = async (contact) => {
 		await fetch(urlApi + contact.id, {

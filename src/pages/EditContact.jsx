@@ -30,7 +30,7 @@ const EditContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const apiUrl = `${import.meta.env.VITE_API_URL}${store.agendaForName}/contacts/${id}`;
+    const apiUrl = `https://playground.4geeks.com/contact/agendas/${store.agendaForName}/contacts/${id}`;
     
     const response = await fetch(apiUrl, {
       method: "PUT",

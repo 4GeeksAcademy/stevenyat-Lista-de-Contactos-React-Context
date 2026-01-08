@@ -12,7 +12,7 @@ export const Home = () => {
 
 	
 	const fetchContact = async () => {
-		const urlApi = `${import.meta.env.VITE_API_URL}${store.agendaForName}/contacts/`;
+		const urlApi = `https://playground.4geeks.com/contact/agendas/${store.agendaForName}/contacts/`;
 		
 		setIsLoading(true);
 		
@@ -45,7 +45,7 @@ export const Home = () => {
 	};
 	const crearAgenda = async () => {
 
-		const urlApiAgenda = `${import.meta.env.VITE_API_URL}stevenyat/`;
+		const urlApiAgenda = `https://playground.4geeks.com/contact/agendas/stevenyat/`;
 
 		const response = await fetch(urlApiAgenda, {
 			method: 'POST',
